@@ -28,6 +28,7 @@ function defineModel(name, attributes) {
     }
     attrs.id = {
         type: ID_TYPE,
+        autoIncrement: true,
         primaryKey: true
     };
     attrs.createdAt = {
@@ -49,9 +50,6 @@ function defineModel(name, attributes) {
             beforeValidate: function (obj) {
                 let now = Date.now();
                 if (obj.isNewRecord) {
-                    if (!obj.id) {
-                        obj.id = generateId();
-                    }
                     obj.createdAt = now;
                     obj.updatedAt = now;
                     obj.version = 0;
