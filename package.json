@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsonwebtoken": "^8.4.0",
     "koa": "^2.7.0",
     "koa-body": "^4.0.8",
     "koa-cors": "0.0.16",
@@ -17,6 +18,7 @@
     "koa-static-cache": "^5.1.2",
     "koa-swig": "^2.2.1",
     "mysql2": "^1.6.5",
-    "sequelize": "^4.42.0"
+    "sequelize": "^4.42.0",
+    "ws": "^6.1.4"
   }
 }

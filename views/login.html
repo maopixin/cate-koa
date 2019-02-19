@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% block title %} {{title}} {% endblock%}
+{% block content %}
+<style>
+    #app{
+        width: 1140px;
+    }
+    .el-header{
+        text-align: center;
+        font-size: 22px;
+        line-height: 40px;
+    }
+    .el-main{
+        text-align: center;
+    }
+    .el-main form{
+        max-width: 500px;
+        min-width: 280px;
+        margin: 0 auto;
+    }
+</style>
+<el-container id="app">
+    <el-header>登录</el-header>
+    <el-main>
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="用户名">
+                <el-input v-model="form.username"></el-input>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input v-model="form.password" type="password"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit">立即登录</el-button>
+            </el-form-item>
+        </el-form>
+    </el-main>
+</el-container>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            form: {
+                username:"",
+                password:""
+            }
+        },
+        methods: {
+            onSubmit: function(){
+                axios.post("/api/login",{
+                    username:this.form.username,
+                    password:this.form.password
+                }).then(res=>{
+                    console.log(res);
+                    if(res.data.status.code===0){
+                        axios.post("/api/login3", {
+                            token: res.data.data.token
+                        }).then(res=>{
+                            console.log(res.data)
+                        })
+                    }
+                }).catch(err=>{
+                    console.log(err)
+                })
+            }
+        }
+    })
+</script>
+{% endblock %}

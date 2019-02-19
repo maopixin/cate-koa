@@ -3,12 +3,13 @@ const Router = require("koa-router");
 const Static = require("koa-static-cache");
 const cors = require("koa-cors");
 const model = require('./sequelize/model');
-const fs = require("fs")
+const fs = require("fs");
 const path = require("path");
 const koaBody = require('koa-body');
 const render = require("koa-swig");
 const co = require('co');
-
+const jwt = require("jsonwebtoken")
+const parseJwt = require("./utils/decodetoken")
 
 const app = new Koa();
 const router = new Router();
@@ -34,7 +35,8 @@ let Banner = model.Banner,
     News = model.News,
     Team = model.Team,
     Friend = model.Friend,
-    AllFood = model.AllFood;
+    AllFood = model.AllFood,
+    Users = model.Users;
 
 // 设置cors跨域
 app.use(cors())
@@ -42,6 +44,53 @@ app.use(cors())
 app.use( Static( __dirname + '/static' , {
     prefix:"/public"
 }))
+// 登录
+router.get('/login', async ctx=> {
+    ctx.body = await ctx.render('login.html',{
+        title:"登录"
+    })
+})
+router.post('/api/login3', parseJwt ,async ctx=> {
+    ctx.body = {
+        status:{
+            code: 0,
+            msg:"成功"
+        }
+    }
+})
+router.post('/api/login', async ctx=> {
+    let {username,password} = ctx.request.body;
+    await Users.find({
+        where: {
+            username,
+            password
+        }
+    }).then(item=>{
+        if(item){
+            var jwtTokenSecret = "mpxJwt";
+            var token = jwt.sign({username,password}, jwtTokenSecret, {expiresIn: 3600});
+            ctx.body = {
+                status: {
+                    code: 0,
+                    msg: "登录成功"
+                },
+                data: {
+                    token,
+                    username
+                }
+            };
+        }else{
+            ctx.body = {
+                status: {
+                    code: 1,
+                    msg: "账号或密码错误"
+                }
+            }
+        }
+    })
+    
+
+})
 // banner
 router.get("/api/banner" ,async ctx => {
     let data = null;
