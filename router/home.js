@@ -3,7 +3,7 @@ const
     Banner = model.Banner,
     FoodClassify = model.FoodClassify,
     FirstShow = model.FirstShow,
-    Service = model.Service,
+    Server = model.Server,
     News = model.News,
     Friend = model.Friend,
     Team = model.Team;
@@ -46,7 +46,7 @@ const fn_home = async ctx => {
     }).then(firstShows=>{
         data.products.foods = firstShows;
     });
-    await Service.findAll().then(items=>{
+    await Server.findAll().then(items=>{
         data.service.shows = items;
     });
     await News.findAll({
