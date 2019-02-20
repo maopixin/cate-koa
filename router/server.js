@@ -1,7 +1,7 @@
 const model = require('../sequelize/model');
-const Service = model.Service;
+const Server = model.Server;
 
-const fn_service = async ctx => {
+const fn_server = async ctx => {
     let data = null;
     let res = null;
     let {id} = ctx.query
@@ -14,7 +14,7 @@ const fn_service = async ctx => {
         };
         return true;
     }
-    await Service.findById(id).then(item=>{
+    await Server.findById(id).then(item=>{
         data = item;
     });
     if(data){
@@ -38,7 +38,7 @@ const fn_service = async ctx => {
 module.exports = [
     {
         type: "GET",
-        url: "/api/service",
-        middleware: fn_service
+        url: "/api/server",
+        middleware: fn_server
     }
 ]
