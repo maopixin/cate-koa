@@ -11,3 +11,4 @@
 //         isLogin: false, // 是否需要登录 （选填，默认值false）  
 //     }
 // ]
+module.exports = []
