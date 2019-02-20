@@ -13,6 +13,38 @@ cd cate-koa
 npm i
 node app.js //或者使用（supervisor） 帮你自动重启
 ```
+## 目录结构
+
+cate_koa
+    --layout/ <-- 继承模板
+    |
+    --router/ <-- 路由文件
+    |
+    --sequelize/ <-- 数据库相关
+    |   |
+    |   --config/ <-- 数据库配置文件
+    |   |
+    |   --models/ <-- 数据库模型文件
+    |   |
+    |   --db.js <-- 如何定义Model
+    |   |
+    |   --model.js <-- 如何导入Model
+    |   |
+    |   --init-db.js <-- 初始化数据库
+    |
+    --static/ <-- 静态资源文件
+    |
+    --utils/ <-- 常用工具
+    |   |
+    |   --controller.js <-- 扫描注册路由
+    |   |
+    |   --decodetoken.js <-- 解析jwt
+    | 
+    --views/ <-- html模板文件
+    |
+    --app.js <-- 业务代码
+    |
+    --package.json <-- 项目描述文件
 ## 用了些什么？
 koa
 
