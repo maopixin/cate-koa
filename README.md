@@ -14,7 +14,7 @@ npm i
 node app.js //或者使用（supervisor） 帮你自动重启
 ```
 ## 目录结构
-
+```
 cate_koa
     --layout/ <-- 继承模板
     |
@@ -45,6 +45,7 @@ cate_koa
     --app.js <-- 业务代码
     |
     --package.json <-- 项目描述文件
+```
 ## 用了些什么？
 koa
 
