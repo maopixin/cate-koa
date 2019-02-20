@@ -5,17 +5,30 @@ const fn_news = async ctx => {
     let data = null;
     let res = null;
     let {id} = ctx.query
-    if(!(id && id>0)){
-        ctx.body = {
-            status: {
-                code: 1,
-                msg:　"id不能为空"
+    if((id && id>0)){
+        await News.findById(id).then(item=>{
+            data = item;
+        });
+        if(data){
+            ctx.body = {
+                status:{
+                    code:0,
+                    msg:"成功"
+                },
+                data
             }
-        };
+        }else{
+            ctx.body = {
+                status:{
+                    code:1,
+                    msg:"数据不存在"
+                },
+            }
+        }
         return true;
     }
-    await News.findById(id).then(item=>{
-        data = item;
+    await News.findAll().then(items=>{
+        data = items;
     });
     if(data){
         ctx.body = {
@@ -29,7 +42,7 @@ const fn_news = async ctx => {
         ctx.body = {
             status:{
                 code:1,
-                msg:"数据不存在"
+                msg:"失败"
             },
         }
     }
