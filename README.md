@@ -40,7 +40,7 @@ cate_koa
     |   |
     |   --controller.js <-- 扫描注册路由
     |   |
-    |   --decodetoken.js <-- 解析jwt
+    |   --decodetoken.js <-- 登录中间件
     | 
     --views/ <-- html模板文件
     |
