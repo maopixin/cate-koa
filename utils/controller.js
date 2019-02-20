@@ -1,21 +1,31 @@
 const fs = require('fs');
-var path = require('path');
-
+const path = require('path');
+const loginMiddleware = require('../utils/decodetoken');
 
 function addMapping(router, mapping) {
-    for (var url in mapping) {
-        if (url.startsWith('GET ')) {
-            var path = url.substring(4);
-            router.get(path, mapping[url]);
-            console.log(`register URL mapping: GET ${path}`);
-        } else if (url.startsWith('POST ')) {
-            var path = url.substring(5);
-            router.post(path, mapping[url]);
-            console.log(`register URL mapping: POST ${path}`);
-        } else {
-            console.log(`invalid URL: ${url}`);
+    mapping.forEach(e => {
+        // 把中间件属性变为数组
+        if(!Array.isArray(e.middleware)){
+            e.middleware = [e.middleware]
         }
-    }
+        // 是否需要登录？
+        if(e.isLogin){
+            e.middleware.unshift(loginMiddleware)
+        }
+        switch (e.type) {
+            case "GET":
+                router.get(e.url, ...e.middleware);
+                console.log(`register URL mapping: GET ${e.url}`);
+                break;
+            case "POST":
+                router.post(e.url, ...e.middleware);
+                console.log(`register URL mapping: POST ${e.url}`);
+                break;
+            default:
+                console.log(`invalid URL: ${e.url}`);
+                break;
+        }
+    });
 }
 
 function addControllers(router) {
