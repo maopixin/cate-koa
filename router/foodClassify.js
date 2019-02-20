@@ -24,6 +24,10 @@ const fn_foodClassify = async ctx => {
     }
 }
 
-module.exports = {
-    "GET /api/foodClassify": fn_foodClassify
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/api/foodClassify",
+        middleware: fn_foodClassify
+    }
+]

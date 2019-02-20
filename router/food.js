@@ -52,8 +52,20 @@ const fn_food_add = async ctx => {
     })
 }
 
-module.exports = {
-    "GET /api/food": fn_food,
-    "GET /admin/food": fn_add_food,
-    "GET /food/add": fn_food_add
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/api/food",
+        middleware: fn_food
+    },
+    {
+        type: "GET",
+        url: "/admin/food",
+        middleware: fn_add_food
+    },
+    {
+        type: "GET",
+        url: "/food/add",
+        middleware: fn_food_add
+    }
+]

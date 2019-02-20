@@ -35,6 +35,10 @@ const fn_news = async ctx => {
     }
 }
 
-module.exports = {
-    "GET /api/news": fn_news
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/api/news",
+        middleware: fn_news
+    }
+]

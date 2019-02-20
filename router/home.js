@@ -79,7 +79,10 @@ const fn_home = async ctx => {
         }
     }
 }
-
-module.exports = {
-    "GET /api/home": fn_home
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/api/home",
+        middleware: [fn_home]
+    }
+]

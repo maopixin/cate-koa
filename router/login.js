@@ -37,7 +37,15 @@ const fn_api_login = async ctx=> {
     })
 }
 
-module.exports = {
-    "GET /login": fn_login,
-    "POST /api/login": fn_api_login
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/login",
+        middleware: fn_login
+    },
+    {
+        type: "POST",
+        url: "/api/login",
+        middleware: fn_api_login
+    }
+]

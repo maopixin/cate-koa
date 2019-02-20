@@ -35,6 +35,10 @@ const fn_service = async ctx => {
     }
 }
 
-module.exports = {
-    "GET /api/service": fn_service
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/api/service",
+        middleware: fn_service
+    }
+]

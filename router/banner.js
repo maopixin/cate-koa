@@ -24,6 +24,10 @@ const fn_banner = async ctx => {
     }
 }
 
-module.exports = {
-    "GET /api/banner": fn_banner
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/api/banner",
+        middleware: fn_banner
+    }
+]

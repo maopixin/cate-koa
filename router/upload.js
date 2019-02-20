@@ -19,6 +19,11 @@ const fn_upload = async ctx => {
     }, data: { url: 'http://' + ctx.headers.host + '/public/image/img/' + newFilename } };
 }
 
-module.exports = {
-    "GET /api/upload": fn_upload
-}
+module.exports = [
+    {
+        type: "POST",
+        url: "/api/upload",
+        middleware: fn_upload,
+        isLogin: true
+    }
+]

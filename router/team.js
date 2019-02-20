@@ -47,6 +47,10 @@ const fn_team = async ctx => {
     }
 }
 
-module.exports = {
-    "GET /api/team": fn_team
-}
+module.exports = [
+    {
+        type: "GET",
+        url: "/api/team",
+        middleware: fn_team
+    }
+]
