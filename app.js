@@ -5,6 +5,7 @@ const koaBody = require('koa-body');
 const render = require("koa-swig");
 const co = require('co');
 const controller = require('./utils/controller');
+const connection = require("./socket/index")
 
 const app = new Koa();
 
@@ -35,4 +36,6 @@ app.use( Static( __dirname + '/static' , {
 // 路由
 app.use(controller());
 
-app.listen(1113)
+let server = app.listen(1113);
+
+connection(server)

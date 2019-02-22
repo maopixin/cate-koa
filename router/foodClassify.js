@@ -1,4 +1,5 @@
 const model = require('../sequelize/model');
+const res = require("../utils/response")
 const FoodClassify = model.FoodClassify;
 
 const fn_foodClassify = async ctx => {
@@ -7,20 +8,9 @@ const fn_foodClassify = async ctx => {
         data = items;
     });
     if(data){
-        ctx.body = {
-            status:{
-                code:0,
-                msg:"成功"
-            },
-            data
-        }
+        res(ctx,0,data)
     }else{
-        ctx.body = {
-            status:{
-                code:1,
-                msg:"失败"
-            },
-        }
+        res(ctx,1)
     }
 }
 

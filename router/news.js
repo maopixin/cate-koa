@@ -1,29 +1,18 @@
 const model = require('../sequelize/model');
+const res = require("../utils/response")
 const News = model.News;
 
 const fn_news = async ctx => {
     let data = null;
-    let res = null;
     let {id} = ctx.query
     if((id && id>0)){
         await News.findById(id).then(item=>{
             data = item;
         });
         if(data){
-            ctx.body = {
-                status:{
-                    code:0,
-                    msg:"成功"
-                },
-                data
-            }
+            res(ctx,0,data)
         }else{
-            ctx.body = {
-                status:{
-                    code:1,
-                    msg:"数据不存在"
-                },
-            }
+            res(ctx,1)
         }
         return true;
     }
@@ -31,20 +20,9 @@ const fn_news = async ctx => {
         data = items;
     });
     if(data){
-        ctx.body = {
-            status:{
-                code:0,
-                msg:"成功"
-            },
-            data
-        }
+        res(ctx,0,data)
     }else{
-        ctx.body = {
-            status:{
-                code:1,
-                msg:"失败"
-            },
-        }
+        res(ctx,1)
     }
 }
 

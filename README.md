@@ -38,9 +38,13 @@ cate_koa
     |
     --utils/ <-- 常用工具
     |   |
+    |   --code.js <-- 响应代码对应信息
+    |   |
     |   --controller.js <-- 扫描注册路由
     |   |
     |   --decodetoken.js <-- 登录中间件
+    |   |
+    |   --response.js <-- 统一响应对象
     | 
     --views/ <-- html模板文件
     |

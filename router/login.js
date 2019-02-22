@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const res = require("../utils/response")
 
 const fn_login = async ctx=> {
     ctx.body = await ctx.render('login.html',{
@@ -16,23 +17,9 @@ const fn_api_login = async ctx=> {
         if(item){
             var jwtTokenSecret = "mpxJwt";
             var token = jwt.sign({username,password}, jwtTokenSecret, {expiresIn: 3600});
-            ctx.body = {
-                status: {
-                    code: 0,
-                    msg: "登录成功"
-                },
-                data: {
-                    token,
-                    username
-                }
-            };
+            res(ctx,0,{token, username})
         }else{
-            ctx.body = {
-                status: {
-                    code: 1,
-                    msg: "账号或密码错误"
-                }
-            }
+            res(ctx,902)
         }
     })
 }

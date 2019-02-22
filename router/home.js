@@ -1,4 +1,5 @@
 const model = require('../sequelize/model');
+const res = require("../utils/response")
 const 
     Banner = model.Banner,
     FoodClassify = model.FoodClassify,
@@ -63,20 +64,9 @@ const fn_home = async ctx => {
         data.friend.friend = items;
     });
     if(data){
-        ctx.body = {
-            status:{
-                code:0,
-                msg:"成功"
-            },
-            data
-        }
+        res(ctx,0,data)
     }else{
-        ctx.body = {
-            status:{
-                code:1,
-                msg:"失败"
-            },
-        }
+        res(ctx,1,data)
     }
 }
 module.exports = [

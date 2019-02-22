@@ -45,6 +45,9 @@
                 password:""
             }
         },
+        created(){
+            this.ws()
+        },
         methods: {
             onSubmit: function(){
                 axios.post("/api/login",{
