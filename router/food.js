@@ -3,20 +3,19 @@ const res = require("../utils/response")
 const AllFood = model.AllFood;
 
 const fn_food = async ctx => {
-    let data = null;
     let {id} = ctx.query
     if(!(id && id>0)){
         res(ctx,2)
         return true;
     }
     await AllFood.findById(id).then(item=>{
-        data = item;
+        if(item){
+            res(ctx,0,data)
+        }else{
+            res(ctx,1,data)
+        }
     });
-    if(data){
-        res(ctx,0,data)
-    }else{
-        res(ctx,1,data)
-    }
+    
 }
 const fn_add_food = async ctx => {
     ctx.body = await ctx.render('addFood.html',{
@@ -32,7 +31,7 @@ const fn_food_add = async ctx => {
         image,
         type
     }).then(d => {
-        ctx.body = d;
+        res(ctx,0,d)
     })
 }
 
@@ -41,13 +40,11 @@ const fn_food_get = async ctx => {
     if(!id){
         res(ctx,2,data);
     }
-    let data = null;
     await AllFood.findById(id).then(item=>{
-        data = item;
+        if(item){
+            res(ctx,0,data);
+        }
     })
-    if(data){
-        res(ctx,0,data)
-    }
 }
 
 module.exports = [
