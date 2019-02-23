@@ -13,7 +13,7 @@ Koa 是一个新的 web 框架，由 Express 幕后的原班人马打造， 致�
 git clone https://github.com/maopixin/cate-koa.git
 cd cate-koa 
 npm i
-node app.js //或者使用（supervisor） 帮你自动重启
+npm start
 ```
 ## 目录结构
 ```
