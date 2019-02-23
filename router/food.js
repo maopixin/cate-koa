@@ -36,6 +36,20 @@ const fn_food_add = async ctx => {
     })
 }
 
+const fn_food_get = async ctx => {
+    let {id} = ctx.query;
+    if(!id){
+        res(ctx,2,data);
+    }
+    let data = null;
+    await AllFood.findById(id).then(item=>{
+        data = item;
+    })
+    if(data){
+        res(ctx,0,data)
+    }
+}
+
 module.exports = [
     {
         type: "GET",
@@ -51,5 +65,10 @@ module.exports = [
         type: "GET",
         url: "/food/add",
         middleware: fn_food_add
+    },
+    {
+        type:"GET",
+        url: "/api/getFood",
+        middleware: fn_food_get
     }
 ]
