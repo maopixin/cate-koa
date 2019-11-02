@@ -19,7 +19,7 @@
     "koa-static-cache": "^5.1.2",
     "koa-swig": "^2.2.1",
     "mysql2": "^1.6.5",
-    "sequelize": "^4.42.0",
+    "sequelize": "^5.15.1",
     "ws": "^6.1.4"
   },
   "devDependencies": {
