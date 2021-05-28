@@ -20,7 +20,7 @@
     "koa-swig": "^2.2.1",
     "mysql2": "^1.6.5",
     "sequelize": "^4.42.0",
-    "ws": "^6.1.4"
+    "ws": "^7.4.5"
   },
   "devDependencies": {
     "supervisor": "^0.12.0"
